@@ -97,7 +97,7 @@ function! s:extend(list, val)
 	let data = a:val
 	if data[-1] == ''
 		let data = data[:-2]
-	end
+	endif
 	return extend(a:list, data)
 endfunction
 
@@ -177,7 +177,6 @@ function! s:callback(context, output) abort
 	let start = a:context.start
 	let end = a:context.end
 
-
 	if get(opts, 'target', '') !=# ''
 		if opts.target ==# 'self'
 			call deletebufline('%', start + 1, end - 1)
@@ -205,9 +204,11 @@ function! s:callback(context, output) abort
 			call append(tstart + 1, a:output)
 		endif
 	else
-		" Insert result directly after the end of the block without a split buffer
-		call append(end, a:output)
+		" Insert formatted result directly after the end of the block without a split buffer
+		let formatted_output = ['# Result', '```'] + a:output + ['```']
+		call append(end, formatted_output)
 	endif
+
 	if has_key(opts, 'after')
 		call opts.after(a:context, a:output)
 	endif
