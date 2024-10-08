@@ -1,6 +1,8 @@
 let s:fences = [{'start': '[`~]\{3,}'}, {'start': '\$\$'}]
 let s:opts = ['name', 'target', 'require', 'tangle']
 let s:optspat = '\(' . join(s:opts, '\|') . '\):\s*\([0-9A-Za-z_+.$#&/-]\+\)'
+let g:backtick_popup_enabled = 1
+let g:popup_id = -1
 
 function! s:error(msg) abort
 	if empty(a:msg)
@@ -285,3 +287,34 @@ function! medieval#eval(...) abort
 	call s:jobstart([lang, fname], function('s:callback', [context]))
 	call winrestview(view)
 endfunction
+
+" Handle popup
+function! ShowPopupAtCursor()
+	if g:backtick_popup_enabled == 0
+		call popup_clear()
+		return
+	endif
+
+	let l:line = getline('.')
+	let l:col = col('.') - 1
+
+	if l:col >= 2 && l:line[l:col-2:l:col] ==# '```'
+		if g:popup_id >= 0
+			call popup_close(g:popup_id)
+		endif
+
+		let g:popup_id = popup_create('C-c C-c to evaluate', {'line': line('.'), 'col': col('.'), 'minwidth': 20})
+	else
+		if g:popup_id >= 0
+			call popup_close(g:popup_id)
+			let g:popup_id = -1
+		endif
+	endif
+endfunction
+
+augroup BacktickPopup
+	autocmd!
+	autocmd CursorMoved * call ShowPopupAtCursor()
+augroup END
+
+nnoremap <C-c><C-c> :EvalBlock<CR>
