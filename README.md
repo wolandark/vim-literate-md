@@ -4,14 +4,28 @@ Evaluate Markdown code blocks within Vim.
 
 ## Modifications over the original plugin:
 - Render the evaluation results in a markdown code block instead of in a split buffer
+- popup at cursor to inform the user of the pre-bound keybinding
+- Added pre-defined `C-c C-c` mapping
 
+![medieval-plus-demo](https://github.com/user-attachments/assets/90244953-85c5-45d4-9b79-5c636b88c1db)
 
-https://github.com/user-attachments/assets/49f96472-33b9-41ae-9df5-25cde490283e
+## Usage
+Press `C-c C-c` over the code block to evalute it
+
+## Configuration 
+Enable or disable the popup msg:
+```vim
+let g:backtick_popup_enabled
+```
+Enable languages example in vimrc:
+```vim
+let g:medieval_langs = ['python=python3', 'php', 'sh', 'bash', 'perl', 'node']
+```
+
+<hr>
 
 
 # Original README
-
-
 [![asciicast](https://asciinema.org/a/306995.svg)](https://asciinema.org/a/306995)
 
 ## Description
