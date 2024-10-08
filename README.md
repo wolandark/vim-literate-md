@@ -1,4 +1,4 @@
-# vim-medieval
+# vim-medieval-plus
 
 Evaluate Markdown code blocks within Vim.
 
