@@ -2,6 +2,16 @@
 
 Evaluate Markdown code blocks within Vim.
 
+## Modifications over the original plugin:
+- Render the evaluation results in a markdown code block instead of in a split buffer
+
+
+https://github.com/user-attachments/assets/49f96472-33b9-41ae-9df5-25cde490283e
+
+
+# Original README
+
+
 [![asciicast](https://asciinema.org/a/306995.svg)](https://asciinema.org/a/306995)
 
 ## Description
