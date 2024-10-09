@@ -1,4 +1,4 @@
-# vim-medieval-plus
+# vim-literate-md
 
 Evaluate Markdown code blocks within Vim.
 
