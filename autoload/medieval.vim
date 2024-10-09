@@ -303,7 +303,10 @@ function! ShowPopupAtCursor()
 			call popup_close(g:popup_id)
 		endif
 
-		let g:popup_id = popup_create('C-c C-c to evaluate', {'line': line('.'), 'col': col('.'), 'minwidth': 20})
+		let g:popup_id = popup_atcursor('C-c C-c to evaluate', {'minwidth': 20,
+					\ 'maxheight': 10,
+					\ 'border': [], 
+					\ 'title': 'Medieval-Plus'})
 	else
 		if g:popup_id >= 0
 			call popup_close(g:popup_id)
@@ -318,3 +321,4 @@ augroup BacktickPopup
 augroup END
 
 nnoremap <C-c><C-c> :EvalBlock<CR>
+
